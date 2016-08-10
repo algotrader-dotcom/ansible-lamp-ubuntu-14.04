@@ -1,0 +1,31 @@
+# This playbook will uninstall nginx,php-fpm,mysql... completed
+---
+- hosts: all
+  gather_facts: no
+  tasks:
+   - name: Remove nginx
+     apt: pkg="{{ item }}" state=absent purge=yes
+     with_items:
+      - nginx-common
+      - nginx-core
+      - nginx
+
+   - name: Remove MySQL
+     apt: pkg="{{ item }}" state=absent purge=yes
+     with_items:
+      - mysql-server
+      - mysql-client
+      - mysql
+   
+   - name: Remove Apache
+     apt: pkg="{{ item }}" state=absent purge=yes
+     with_items:
+      - apache2
+      - apache2-*
+
+   - name: Auto Remove
+     shell: "{{ item }}"
+     with_items:
+      - rm -rf /var/lib/mysql
+      - rm -rf /var/www/vhosts/drupal8.axai.org
+      - apt-get autoremove -y

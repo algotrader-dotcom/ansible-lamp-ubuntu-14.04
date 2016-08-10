@@ -1,0 +1,2 @@
+[lookbook-web]
+54.85.179.172 ansible_ssh_port=22 ansible_ssh_user=ansible ansible_ssh_pass=khoican123
